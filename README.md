@@ -2,7 +2,7 @@
 <img src="https://user-images.githubusercontent.com/25421570/234197954-8e8118b7-4290-4c3a-9f83-78a3422be439.png" width="90%">
 </p>
 
-# BooksAPI
+# LibraryAPI
 
 BooksAPI is a RESTful API that provides access to a database called ELibraryDB, designed to handle the storage needs of a fictional library. The database contains information about books, authors, publishers, and borrowers, as well as over 26 stored procedures to perform various library-related tasks.
 
