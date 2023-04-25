@@ -20,6 +20,7 @@ namespace API.Controllers
         private readonly ApiContext _context;
 
         public record UserData(string email, string password);
+        public record User(string username,int Id,string Role,string Department);
         public AuthenticationController(IConfiguration config,ApiContext context)
         {
             _config = config;
@@ -34,23 +35,13 @@ namespace API.Controllers
             return (user is null) ? Unauthorized() : Ok(GenToken(user));
         }
 
-        private Human? CheckData(UserData data) 
+        private User? CheckData(UserData data) 
         {
             var user = data.email;
             var hash = Convert.ToHexString(SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes(data.password)));
-            Console.WriteLine($"Entered\n{hash}\nWanted:\n");
-            if (_context.Humans.Where(x => x.email == user && x.password == hash).Any())
-            {
-                var human = _context.Humans.Single(x => x.email == user && hash == x.password);
-                Console.WriteLine(human.Id);
-                Console.WriteLine(human.Role);
-                Console.WriteLine(human.name);
-                Console.WriteLine(human.Department);
-                return human;
-            }
             return null;
         }
-        private string? GenToken(Human user)
+        private string? GenToken(User user)
         {
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetValue<string>("Authentication:SecretKey")));
             var SigningCreds = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
