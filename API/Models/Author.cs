@@ -1,9 +1,10 @@
-﻿using System;
+﻿using API.Interfaces;
+using System;
 using System.Collections.Generic;
 
 namespace API.Models;
 
-public partial class Author
+public partial class Author : IUser
 {
     public int AuthorId { get; set; }
 
@@ -16,6 +17,8 @@ public partial class Author
     public int ContactId { get; set; }
 
     public string? Bio { get; set; }
+
+    public string? Password { get; set; }
 
     public virtual ContactDetail Contact { get; set; } = null!;
 

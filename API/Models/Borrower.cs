@@ -1,9 +1,10 @@
-﻿using System;
+﻿global using API.Interfaces;
+using System;
 using System.Collections.Generic;
 
 namespace API.Models;
 
-public partial class Borrower
+public partial class Borrower : IUser
 {
     public int BorrowerId { get; set; }
 
@@ -14,6 +15,8 @@ public partial class Borrower
     public string LastName { get; set; } = null!;
 
     public int ContactId { get; set; }
+
+    public string? Password { get; set; }
 
     public virtual ICollection<Borrowing> Borrowings { get; set; } = new List<Borrowing>();
 

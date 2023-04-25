@@ -80,6 +80,7 @@ public partial class ElibraryDbContext : DbContext
             entity.Property(e => e.FirstName).HasMaxLength(50);
             entity.Property(e => e.LastName).HasMaxLength(50);
             entity.Property(e => e.MiddleName).HasMaxLength(50);
+            entity.Property(e => e.Password).HasMaxLength(50);
 
             entity.HasOne(d => d.Contact).WithMany(p => p.Authors)
                 .HasForeignKey(d => d.ContactId)
@@ -171,6 +172,7 @@ public partial class ElibraryDbContext : DbContext
             entity.Property(e => e.FirstName).HasMaxLength(50);
             entity.Property(e => e.LastName).HasMaxLength(50);
             entity.Property(e => e.MiddleName).HasMaxLength(50);
+            entity.Property(e => e.Password).HasMaxLength(50);
 
             entity.HasOne(d => d.Contact).WithMany(p => p.Borrowers)
                 .HasForeignKey(d => d.ContactId)
@@ -245,7 +247,12 @@ public partial class ElibraryDbContext : DbContext
 
         modelBuilder.Entity<Publisher>(entity =>
         {
+            entity.Property(e => e.Password).HasMaxLength(50);
             entity.Property(e => e.PublisherName).HasMaxLength(250);
+
+            entity.HasOne(d => d.Contact).WithMany(p => p.Publishers)
+                .HasForeignKey(d => d.ContactId)
+                .HasConstraintName("FK_Publishers_ContactDetails");
         });
 
         modelBuilder.Entity<Review>(entity =>

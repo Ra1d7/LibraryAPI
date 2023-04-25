@@ -16,4 +16,6 @@ public partial class ContactDetail
     public virtual ICollection<Author> Authors { get; set; } = new List<Author>();
 
     public virtual ICollection<Borrower> Borrowers { get; set; } = new List<Borrower>();
+
+    public virtual ICollection<Publisher> Publishers { get; set; } = new List<Publisher>();
 }
